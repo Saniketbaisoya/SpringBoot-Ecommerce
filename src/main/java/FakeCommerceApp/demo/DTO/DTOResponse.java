@@ -1,0 +1,20 @@
+package FakeCommerceApp.demo.DTO;
+
+import java.math.BigDecimal;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@RequiredArgsConstructor
+@Builder
+public class DTOResponse {
+    private String title;
+    private String description;
+    private BigDecimal price;
+    private String image;
+    private String rating;
+}

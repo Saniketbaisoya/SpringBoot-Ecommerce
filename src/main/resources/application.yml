@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: demo
+# Now datasource mai maine database se connect krne ke liye sare essentials de diye....
+  datasource:
+    url: jdbc:mysql://localhost:3306/fakeCommerce
+    username: root
+    password: Shaniket@Gymm123
+    driver-class: com.mysql.cj.jdbc.Driver
+  jpa:
+    show-sql: true
+    # create, validate, update, create-drop.
+    hibernate:
+      ddl-auto: validate  # because, from now whenever we make a new changes in schema,
+                          # it will not impact our database tables....
+  flyway:
+    enabled: true
+    locations: classpath:db/migrations/migration
+  
+
