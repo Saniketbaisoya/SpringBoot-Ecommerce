@@ -2,6 +2,9 @@ package FakeCommerceApp.demo.Controllers;
 
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,8 +26,12 @@ public class CategoryController {
     private CategoryService categoryService;
 
     @PostMapping
-    public Category createCategory(@RequestBody DTOCategory requestDTO){
-        return categoryService.createCategory(requestDTO);
+    public ResponseEntity<Category> createCategory(@RequestBody DTOCategory requestDTO){
+        // return CategoryService.createCategory(requestDTO);
+        return  ResponseEntity
+                // .status(HttpStatusCode.valueOf(201))
+                .status(HttpStatus.CREATED)
+                .body(categoryService.createCategory(requestDTO));
     }
 
     @GetMapping
