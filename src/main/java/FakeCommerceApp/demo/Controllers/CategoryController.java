@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import FakeCommerceApp.demo.DTO.DTOCategory;
 import FakeCommerceApp.demo.Services.CategoryService;
 import FakeCommerceApp.demo.schema.Category;
+import FakeCommerceApp.demo.utils.ApiResponse;
 import lombok.AllArgsConstructor;
 
 
@@ -26,12 +27,16 @@ public class CategoryController {
     private CategoryService categoryService;
 
     @PostMapping
-    public ResponseEntity<Category> createCategory(@RequestBody DTOCategory requestDTO){
+    public ResponseEntity<ApiResponse<Category>> createCategory(@RequestBody DTOCategory requestDTO){
         // return CategoryService.createCategory(requestDTO);
+        // return  ResponseEntity
+        //         // .status(HttpStatusCode.valueOf(201))
+        //         .status(HttpStatus.CREATED)
+        //         .body(categoryService.createCategory(requestDTO));
+        Category category = categoryService.createCategory(requestDTO);
         return  ResponseEntity
-                // .status(HttpStatusCode.valueOf(201))
                 .status(HttpStatus.CREATED)
-                .body(categoryService.createCategory(requestDTO));
+                .body(ApiResponse.SuccessResponse(category, "SuccessFully created the Category !!"));
     }
 
     @GetMapping
