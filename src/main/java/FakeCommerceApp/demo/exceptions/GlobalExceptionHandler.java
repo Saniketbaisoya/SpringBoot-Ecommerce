@@ -37,4 +37,11 @@ public class GlobalExceptionHandler {
                 .status(HttpStatus.NOT_FOUND)
                 .body(ApiResponse.ErrorResponse(ex.getMessage(), "Resource Not Found"));
     }
+
+    @ExceptionHandler(ResourceDeletionException.class)
+    ResponseEntity<ApiResponse<Void>> handleDeleteException(ResourceDeletionException ex){
+        return  ResponseEntity
+                .status(HttpStatus.CONFLICT)
+                .body(ApiResponse.ErrorResponse(ex.getMessage(), "Resource Not Found for delete"));
+    }
 }

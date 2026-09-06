@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import FakeCommerceApp.demo.DTO.DTOCategory;
 import FakeCommerceApp.demo.Repositories.CategoryRepository;
+import FakeCommerceApp.demo.exceptions.ResourceDeletionException;
 import FakeCommerceApp.demo.exceptions.ResourceNotFoundException;
 import FakeCommerceApp.demo.schema.Category;
 import lombok.AllArgsConstructor;
@@ -34,6 +35,9 @@ public class CategoryService {
     }
 
     public void deletCategory(Long id){
-        categoryRepository.deleteById(id);
+        Category category = categoryRepository.findById(id)
+            .orElseThrow(() -> new ResourceDeletionException("Category not found"));
+            categoryRepository.delete(category);
+
     }
 }
