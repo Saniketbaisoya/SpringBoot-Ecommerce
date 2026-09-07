@@ -8,6 +8,7 @@ import FakeCommerceApp.demo.DTO.DTOProduct;
 import FakeCommerceApp.demo.DTO.DTOResponse;
 import FakeCommerceApp.demo.DTO.DTOResponseForProduct;
 import FakeCommerceApp.demo.Repositories.ProductRepository;
+import FakeCommerceApp.demo.exceptions.ResourceNotFoundException;
 import FakeCommerceApp.demo.schema.Category;
 import FakeCommerceApp.demo.schema.Product;
 import lombok.RequiredArgsConstructor;
@@ -40,7 +41,7 @@ public class ProductServices {
         // return productRepository.findById(id)
         //     .orElseThrow(() -> new RuntimeException("Product not found"));
         Product product = productRepository.findById(id)
-        .orElseThrow(() -> new RuntimeException("Product not found"));
+        .orElseThrow(() -> new ResourceNotFoundException("Product not found"));
 
         return DTOResponse.builder()
                 .title(product.getTitle())

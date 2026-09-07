@@ -2,6 +2,9 @@ package FakeCommerceApp.demo.Controllers;
 
 import java.util.List;
 
+import org.apache.catalina.connector.Response;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +18,7 @@ import FakeCommerceApp.demo.DTO.DTOResponse;
 import FakeCommerceApp.demo.DTO.DTOResponseForProduct;
 import FakeCommerceApp.demo.Services.ProductServices;
 import FakeCommerceApp.demo.schema.Product;
+import FakeCommerceApp.demo.utils.ApiResponse;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -24,28 +28,46 @@ public class ProductController {
     private final ProductServices productServices;
 
     @GetMapping
-    public List<Product> getAllProducts(){
-        return productServices.getAllProducts();
+    public ResponseEntity<ApiResponse<List<Product>>> getAllProducts(){
+        // return productServices.getAllProducts();
+        List<Product> products = productServices.getAllProducts();
+        return  ResponseEntity
+                .status(HttpStatus.OK)
+                .body(ApiResponse.SuccessResponse(products, "SuccessFully fetched all products !!"));
     }
 
     @GetMapping("/{id}")
-    public DTOResponse getProductById(@PathVariable Long id){
-        return productServices.getProductById(id);
+    public ResponseEntity<ApiResponse<DTOResponse>> getProductById(@PathVariable Long id){
+        // return productServices.getProductById(id);
+        DTOResponse productResponse = productServices.getProductById(id);
+        return  ResponseEntity
+                .status(HttpStatus.OK)
+                .body(ApiResponse.SuccessResponse(productResponse, "SuccessFully Fetched the product with id : " + id));
     }
 
     @GetMapping("/{id}/category")
-    public DTOResponseForProduct getProductByIdWithDetails(@PathVariable Long id){
-        return productServices.getProductByIdWithDetail(id);
+    public ResponseEntity<ApiResponse<DTOResponseForProduct>> getProductByIdWithDetails(@PathVariable Long id){
+        // return productServices.getProductByIdWithDetail(id);
+        DTOResponseForProduct productResponse = productServices.getProductByIdWithDetail(id);
+        return  ResponseEntity
+                .status(HttpStatus.OK)
+                .body(ApiResponse.SuccessResponse(productResponse, "SuccessFully fetched the product with id : " + id));
     }
 
     @PostMapping
-    public Product createProduct(@RequestBody DTOProduct requestDTO){
-        return productServices.createProduct(requestDTO);
+    public ResponseEntity<ApiResponse<Product>> createProduct(@RequestBody DTOProduct requestDTO){
+        Product product = productServices.createProduct(requestDTO);
+        return  ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(ApiResponse.SuccessResponse(product, "SuccessFully fetched the product !!"));
     }
 
     @DeleteMapping("/{id}")
-    public void deleteProduct(@PathVariable Long id){
+    public ResponseEntity<ApiResponse<Void>> deleteProduct(@PathVariable Long id){
         productServices.deleteProduct(id);
+        return  ResponseEntity
+                .status(HttpStatus.OK)
+                .body(ApiResponse.SuccessResponse(null, "SuccessFully deleted the product with id : " + id));
     }
 
     // @GetMapping("/category/{id}")
