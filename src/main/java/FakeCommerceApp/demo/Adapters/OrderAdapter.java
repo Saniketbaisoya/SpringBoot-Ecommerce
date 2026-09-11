@@ -29,7 +29,7 @@ public class OrderAdapter {
                 .collect(Collectors.toList());
     }
 
-    public DTOResponseForOrder mapOrderToDTOResponseForOrder( OrderSchema order){
+    public DTOResponseForOrder mapOrderToDTOResponseForOrder( OrderSchema order ){
         List<OrderProduct> orderProducts = orderProductRepository.findByOrderId(order.getId());
         
         List<DTOResponseForOrderItem> items = mapOrderProductsToDTOResponseForOrderItems(orderProducts);
