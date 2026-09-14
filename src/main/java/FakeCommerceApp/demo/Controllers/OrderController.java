@@ -7,11 +7,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import FakeCommerceApp.demo.DTO.DTORequestForOrder;
 import FakeCommerceApp.demo.DTO.DTOResponseForOrder;
 import FakeCommerceApp.demo.Services.OrderService;
+import FakeCommerceApp.demo.schema.OrderSchema;
 import FakeCommerceApp.demo.utils.ApiResponse;
 import lombok.RequiredArgsConstructor;
 
@@ -21,6 +25,11 @@ import lombok.RequiredArgsConstructor;
 public class OrderController {
     
     private OrderService orderService;
+
+    @PostMapping
+    public DTOResponseForOrder createOrder(@RequestBody  DTORequestForOrder requestForOrder){
+        return orderService.createOrder(requestForOrder);
+    }
 
     @GetMapping
     public ResponseEntity<ApiResponse<List<DTOResponseForOrder>>> getAllOrders() {

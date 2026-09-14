@@ -34,4 +34,6 @@ out/
 /.nb-gradle/
 
 ### VS Code ###
+.gradle/
+build/
 .vscode/
