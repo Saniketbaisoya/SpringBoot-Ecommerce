@@ -12,9 +12,11 @@ import FakeCommerceApp.demo.exceptions.ResourceDeletionException;
 import FakeCommerceApp.demo.exceptions.ResourceNotFoundException;
 import FakeCommerceApp.demo.schema.Category;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 @Service
 @AllArgsConstructor
+@RequiredArgsConstructor
 public class CategoryService {
     private CategoryRepository categoryRepository;
 
