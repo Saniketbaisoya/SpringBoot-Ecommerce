@@ -23,7 +23,7 @@ import FakeCommerceApp.demo.schema.Category;
 import FakeCommerceApp.demo.schema.Product;
 
 @DataJpaTest
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.ANY)
 @Import(TestJpaConfig.class)
 public class ProductRepositoryTest {
 
@@ -39,7 +39,7 @@ public class ProductRepositoryTest {
     @BeforeEach
     void setUp(){
         // arrange
-        category = Category.builder().name("Electronics").build();
+        category = Category.builder().name("Test Category").build();
         product = Product.builder()
                   .title("Test Product")
                   .description("Test Product description")
